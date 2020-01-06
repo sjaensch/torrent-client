@@ -1,13 +1,13 @@
 # torrent-client
 
-[![CircleCI](https://circleci.com/gh/veggiedefender/torrent-client.svg?style=shield)](https://circleci.com/gh/veggiedefender/torrent-client)
+[![CircleCI](https://circleci.com/gh/sjaensch/torrent-client.svg?style=shield)](https://circleci.com/gh/sjaensch/torrent-client)
 
 Tiny BitTorrent client written in Go. Read the blog post: https://blog.jse.li/posts/torrent/
 
 ## Install
 
 ```sh
-go get github.com/veggiedefender/torrent-client
+go get github.com/sjaensch/torrent-client
 ```
 
 ## Usage
