@@ -24,11 +24,19 @@ type TorrentFile struct {
 	Name        string
 }
 
+type bencodeFile struct {
+	Length int      `bencode:"length"`
+	Path   []string `bencode:"path"`
+	Md5sum string   `bencode:"md5sum"`
+}
+
 type bencodeInfo struct {
-	Pieces      string `bencode:"pieces"`
-	PieceLength int    `bencode:"piece length"`
-	Length      int    `bencode:"length"`
-	Name        string `bencode:"name"`
+	Pieces      string        `bencode:"pieces"`
+	PieceLength int           `bencode:"piece length"`
+	Length      int           `bencode:"length"`
+	Name        string        `bencode:"name"`
+	Md5sum      string        `bencode:"md5sum"`
+	Files       []bencodeFile `bencode:"files"`
 }
 
 type bencodeTorrent struct {
