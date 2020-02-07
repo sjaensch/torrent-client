@@ -14,6 +14,13 @@ import (
 // Port to listen on
 const Port uint16 = 6881
 
+// FileItem represents a single file within a TorrentFile
+type FileItem struct {
+	Path   []string
+	Md5sum string
+	Length int
+}
+
 // TorrentFile encodes the metadata from a .torrent file
 type TorrentFile struct {
 	Announce    string
@@ -21,6 +28,7 @@ type TorrentFile struct {
 	PieceHashes [][20]byte
 	PieceLength int
 	Length      int
+	Files       []FileItem
 	Name        string
 }
 
@@ -141,6 +149,29 @@ func (bto *bencodeTorrent) toTorrentFile() (TorrentFile, error) {
 		PieceLength: bto.Info.PieceLength,
 		Length:      bto.Info.Length,
 		Name:        bto.Info.Name,
+	}
+	if len(bto.Info.Files) > 0 {
+		t.Files = make([]FileItem, len(bto.Info.Files))
+		for i, entry := range bto.Info.Files {
+			fi := FileItem{
+				Path:   make([]string, len(entry.Path)+1),
+				Md5sum: entry.Md5sum,
+				Length: entry.Length,
+			}
+			fi.Path[0] = t.Name
+			for j := range entry.Path {
+				fi.Path[j+1] = entry.Path[j]
+			}
+			t.Files[i] = fi
+		}
+	} else {
+		t.Files = make([]FileItem, 1)
+		t.Files[0] = FileItem{
+			Path:   make([]string, 1),
+			Md5sum: bto.Info.Md5sum,
+			Length: bto.Info.Length,
+		}
+		t.Files[0].Path[0] = bto.Info.Name
 	}
 	return t, nil
 }
