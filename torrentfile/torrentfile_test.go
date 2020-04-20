@@ -50,7 +50,7 @@ func TestToTorrentFile(t *testing.T) {
 			},
 			output: TorrentFile{
 				Announce: "http://bttracker.debian.org:6969/announce",
-				InfoHash: [20]byte{216, 247, 57, 206, 195, 40, 149, 108, 204, 91, 191, 31, 134, 217, 253, 207, 219, 168, 206, 182},
+				InfoHash: [20]byte{0x68, 0x46, 0xa2, 0xf7, 0x3a, 0x38, 0x8c, 0x3d, 0xc6, 0xb6, 0x3b, 0x56, 0x75, 0xaf, 0x1, 0x3, 0x25, 0xf0, 0x83, 0xb3},
 				PieceHashes: [][20]byte{
 					{49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106},
 					{97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48},
